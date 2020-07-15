@@ -1,6 +1,6 @@
-# To build this container, go to ESMValCore root folder and execute:
+# To build this container, go to ESMValCore root folder and execute :
 # docker build -t esmvalcore:latest . -f docker/Dockerfile
-FROM continuumio/miniconda3
+FROM bsces/miniconda3:debian-stretch-20190610
 
 WORKDIR /src/ESMValCore
 COPY environment.yml .
