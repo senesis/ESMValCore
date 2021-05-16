@@ -40,23 +40,9 @@ def get_start_end_year(filename):
     # First check for a block of two potential dates separated by _ or -
     daterange = re.findall(r'([0-9]{4,12}[-_][0-9]{4,12})', stem)
     if daterange:
-        # In order to try to support e.g. a filename which includes an
-        # experiment name which itself includes a year, select date
-        # block length as the length common to the first pair of
-        # consecutive blocks with identical lengths
-        all_blocks = re.findall(r'([0-9]{4,12}[-_]|[-_][0-9]{4,12})', stem)
-        for i in range(1,len(all_blocks)) :
-            length = len(all_blocks[i-1])
-            if length == len(all_blocks[i]) :
-                length -= 1
-                break
-            else:
-                length=0
-        if length != 0 :
-            daterange = re.findall(r'([0-9]{{{length}}}[-_][0-9]{{{length}}})'.format(length=length), stem)
-            start_date, end_date = re.findall(r'([0-9]{4,12})', daterange[0])
-            start_year = start_date[:4]
-            end_year = end_date[:4]
+        start_date, end_date = re.findall(r'([0-9]{4,12})', daterange[0])
+        start_year = start_date[:4]
+        end_year = end_date[:4]
     else:
         # Check for single dates in the filename
         dates = re.findall(r'([0-9]{4,12})', stem)
